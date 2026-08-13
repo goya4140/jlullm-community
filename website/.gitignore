@@ -1,0 +1,10 @@
+node_modules/
+.npm-cache/
+dist/
+implementation-*.png
+design-comparison-final.png
+AGENTS.md
+design-qa.md
+design-reference-option-3.png
+qa-compare.html
+qa-mobile.html
