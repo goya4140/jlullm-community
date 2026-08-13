@@ -127,7 +127,7 @@ export function App() {
             <p>985 高校 · 海外高校 · 科技大厂</p>
           </div>
           <div className="proof-members">
-            <p className="proof-label">我们的成员来自于</p>
+            <p className="proof-label">我们的成员去往</p>
             <p>吉林大学 · 浙江大学 · 中山大学 · 清华大学 · 南京大学 · 悉尼大学 · 字节跳动 · 腾讯 · 阿里巴巴</p>
           </div>
         </section>
