@@ -1,182 +1,343 @@
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
-  Flask,
+  ArrowUpRight,
+  Brain,
   Check,
-  Copy,
-  FileText,
+  CirclesThreePlus,
+  EnvelopeSimple,
+  Heartbeat,
   List,
-  MagnifyingGlass,
+  Robot,
+  Sparkle,
   UsersThree,
   X,
 } from "@phosphor-icons/react";
 
-const stages = [
-  { icon: UsersThree, title: "找到伙伴", copy: "跨专业、跨方向，扫描兴趣，找到合拍的人。" },
-  { icon: MagnifyingGlass, title: "形成问题", copy: "从真实好奇出发，碰撞想法，确定可研究的问题。" },
-  { icon: Flask, title: "实验验证", copy: "共享资源与方法，动手验证，快速迭代。" },
-  { icon: FileText, title: "共同发表", copy: "打磨写作与复现，彼此审阅，把工作发表出来。" },
+const routes = [
+  { id: "home", zh: "首页", en: "Home", slug: "" },
+  { id: "research", zh: "研究", en: "Research", slug: "research" },
+  { id: "publication", zh: "论文", en: "Publication", slug: "publication" },
+  { id: "members", zh: "成员", en: "Members", slug: "members" },
+  { id: "recruitment", zh: "招募", en: "Recruitment", slug: "recruitment" },
+  { id: "contact", zh: "联系", en: "Contact", slug: "contact" },
 ];
 
 const researchAreas = [
-  ["01", "大语言模型", "从训练、推理到评测，理解并推进语言智能。"],
-  ["02", "Agent", "探索能规划、调用工具并在环境中学习的智能体。"],
-  ["03", "多模态", "让模型联合理解语言、图像、声音与真实世界。"],
-  ["04", "AI for Medicine", "用人工智能连接医学数据、临床问题与健康研究。"],
+  {
+    number: "01",
+    title: "大语言模型",
+    en: "Large Language Models",
+    icon: Brain,
+    question: "如何让语言模型真正理解复杂任务，而不只是生成看似合理的答案？",
+    method: "我们关注训练、推理与评测方法，研究模型能力的边界、可靠性与高效适配。",
+    value: "让语言智能成为能够被验证、复现和持续改进的研究工具。",
+  },
+  {
+    number: "02",
+    title: "智能体",
+    en: "Agent",
+    icon: Robot,
+    question: "模型怎样才能主动规划、调用工具，并在真实环境中完成长期任务？",
+    method: "我们探索任务分解、记忆、工具使用、多智能体协作与环境反馈机制。",
+    value: "构建能够行动、反思并与人协同的下一代智能系统。",
+  },
+  {
+    number: "03",
+    title: "多模态",
+    en: "Multimodal Intelligence",
+    icon: CirclesThreePlus,
+    question: "机器如何像人一样联合理解文字、图像、声音与真实世界信号？",
+    method: "我们研究跨模态表示、对齐、生成与推理，让不同信息来源相互补充。",
+    value: "帮助 AI 从单一文本走向对复杂世界的整体理解。",
+  },
+  {
+    number: "04",
+    title: "医学人工智能",
+    en: "AI for Medicine",
+    icon: Heartbeat,
+    question: "AI 如何从医学数据中学习，并为真实的临床与健康问题提供可信帮助？",
+    method: "我们连接医学影像、多模态数据与临床问题，关注可解释、可泛化的医学智能。",
+    value: "以严谨的方法推动 AI 在医学研究与健康场景中的可靠应用。",
+  },
+];
+
+const leaders = [
+  { name: "林景豪", summary: "JLULLM 社区负责人", url: "", image: "" },
+  { name: "王淏", summary: "JLULLM 社区负责人", url: "", image: "" },
 ];
 
 const members = [
-  ["吴天润", "浙江大学"],
-  ["郭媛媛", "中山大学"],
-  ["李昱辰", "清华大学"],
-  ["颜毅", "南京大学 LAMDA"],
-  ["曾琦崴", "悉尼大学 RA"],
-  ["陈国庆", "字节跳动"],
-  ["常智德", "腾讯"],
-  ["曹相", "阿里巴巴"],
+  { name: "吴天润", summary: "浙江大学", url: "", image: "" },
+  { name: "郭媛媛", summary: "中山大学", url: "", image: "" },
+  { name: "李昱辰", summary: "清华大学", url: "", image: "" },
+  { name: "颜毅", summary: "南京大学 LAMDA", url: "", image: "" },
+  { name: "曾琦崴", summary: "悉尼大学 RA", url: "", image: "" },
+  { name: "陈国庆", summary: "字节跳动", url: "", image: "" },
+  { name: "常智德", summary: "腾讯", url: "", image: "" },
+  { name: "曹相", summary: "阿里巴巴", url: "", image: "" },
 ];
 
-const navItems = [
-  ["首页", "home"],
-  ["我们在做什么", "research"],
-  ["成员", "members"],
-  ["加入", "join"],
+const recruitmentCriteria = [
+  ["保持好奇", "愿意从真实问题出发，持续阅读、提问并形成自己的判断。"],
+  ["持续投入", "能够为一个研究问题留出稳定时间，接受研究中的反复与不确定。"],
+  ["尊重事实", "重视实验、记录与复现，让结论经得起讨论和验证。"],
+  ["开放协作", "愿意分享过程、回应反馈，也愿意帮助伙伴把工作共同推进。"],
 ];
 
-export function App() {
+function getCurrentPage() {
+  const segment = window.location.pathname.split("/").filter(Boolean).at(-1) || "";
+  return routes.find((route) => route.slug === segment)?.id || "home";
+}
+
+function useSiteLinks(currentPage) {
+  const root = currentPage === "home" ? "./" : "../";
+  return {
+    root,
+    href: (slug = "") => `${root}${slug ? `${slug}/` : ""}`,
+  };
+}
+
+function Header({ currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [copied, setCopied] = useState(false);
+  const { href } = useSiteLinks(currentPage);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-18% 0px -58%", threshold: [0.1, 0.4, 0.7] },
-    );
-    document.querySelectorAll("section[id]").forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  const closeMenu = () => setMenuOpen(false);
-  const copyApplication = async () => {
-    const template = [
-      "JLULLM 社区申请",
-      "姓名 / 年级 / 专业：",
-      "关注的 AI 研究方向：",
-      "最近在读的一篇论文：",
-      "希望一起探索的问题：",
-      "每周可投入的时间：",
-    ].join("\n");
-    await navigator.clipboard.writeText(template);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2400);
-  };
+    document.body.classList.toggle("menu-is-open", menuOpen);
+    const closeWithEscape = (event) => event.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", closeWithEscape);
+    return () => {
+      document.body.classList.remove("menu-is-open");
+      window.removeEventListener("keydown", closeWithEscape);
+    };
+  }, [menuOpen]);
 
   return (
-    <div className="site-shell">
-      <header className="site-header" aria-label="主导航">
-        <a className="brand" href="#home" onClick={closeMenu} aria-label="JLULLM 首页">
-          <strong>JLULLM</strong><span aria-hidden="true">·</span><span>吉林大学 AI 科研社区</span>
-        </a>
-        <button className="menu-toggle" type="button" aria-label={menuOpen ? "关闭菜单" : "打开菜单"}
-          aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
-          {menuOpen ? <X size={23} /> : <List size={24} />}
-        </button>
-        <nav className={menuOpen ? "nav-links is-open" : "nav-links"}>
-          {navItems.map(([label, id]) => (
-            <a key={id} href={`#${id}`} className={activeSection === id ? "is-active" : ""} onClick={closeMenu}>
-              {label}
-            </a>
+    <header className="site-header" aria-label="主导航">
+      <a className="brand" href={href()} aria-label="JLULLM 首页">
+        <strong>JLULLM</strong><span aria-hidden="true">·</span><span>吉林大学 AI 科研社区</span>
+      </a>
+      <button
+        className="menu-toggle"
+        type="button"
+        aria-label={menuOpen ? "关闭菜单" : "打开菜单"}
+        aria-expanded={menuOpen}
+        aria-controls="site-navigation"
+        onClick={() => setMenuOpen((value) => !value)}
+      >
+        {menuOpen ? <X size={23} /> : <List size={24} />}
+      </button>
+      <nav id="site-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"}>
+        {routes.map((route) => (
+          <a
+            key={route.id}
+            href={href(route.slug)}
+            className={currentPage === route.id ? "is-active" : ""}
+            aria-current={currentPage === route.id ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
+            <span>{route.zh}</span><small>{route.en}</small>
+          </a>
+        ))}
+      </nav>
+    </header>
+  );
+}
+
+function Footer({ currentPage }) {
+  const { href } = useSiteLinks(currentPage);
+  return (
+    <footer>
+      <div className="footer-main">
+        <a className="brand footer-brand" href={href()}><strong>JLULLM</strong><span>吉林大学 AI 科研社区</span></a>
+        <p>以同行连接想法，以研究抵达更远。</p>
+      </div>
+      <nav className="footer-nav" aria-label="页脚导航">
+        {routes.slice(1).map((route) => <a key={route.id} href={href(route.slug)}>{route.en}</a>)}
+      </nav>
+      <p className="copyright">© {new Date().getFullYear()} JLULLM Community</p>
+    </footer>
+  );
+}
+
+function PageHero({ kicker, title, description }) {
+  return (
+    <section className="page-hero">
+      <p className="page-kicker">{kicker}</p>
+      <h1>{title}</h1>
+      <p className="page-description">{description}</p>
+    </section>
+  );
+}
+
+function HomePage() {
+  const { href, root } = useSiteLinks("home");
+  return (
+    <section className="hero hero-home" aria-labelledby="home-title">
+      <div className="hero-copy">
+        <p className="eyebrow">JLULLM · AI Research Community</p>
+        <h1 id="home-title">科研，<br />不必一个人开始</h1>
+        <p className="hero-lede">和志同道合的同学，<br />一起把 AI 想法做成真正的研究。</p>
+        <div className="hero-actions">
+          <a className="button button-primary" href={href("recruitment")}>申请加入 <ArrowRight size={18} weight="bold" /></a>
+          <a className="text-link" href={href("research")}>了解研究 <ArrowRight size={17} /></a>
+        </div>
+      </div>
+      <div className="hero-visual">
+        <img src={`${root}hero-research-table.png`} alt="共享研究桌上的论文、代码、公式草稿与实验笔记" />
+      </div>
+    </section>
+  );
+}
+
+function ResearchPage() {
+  return (
+    <div className="page page-research">
+      <PageHero
+        kicker="Research · 研究"
+        title={<>从值得追问的问题，<br />走向可靠的研究。</>}
+        description="我们围绕语言、行动、多模态与医学四个方向开展探索。方向会演进，但问题意识、实验事实与可复现性始终是共同的方法。"
+      />
+      <section className="research-grid" aria-label="研究方向">
+        {researchAreas.map(({ number, title, en, icon: Icon, question, method, value }) => (
+          <article className="research-card" key={number}>
+            <div className="research-card-top"><span>{number}</span><Icon size={30} weight="light" aria-hidden="true" /></div>
+            <p className="card-en">{en}</p><h2>{title}</h2>
+            <p className="research-question">{question}</p>
+            <dl><div><dt>方法</dt><dd>{method}</dd></div><div><dt>价值</dt><dd>{value}</dd></div></dl>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function PublicationPage() {
+  return (
+    <div className="page page-publication">
+      <PageHero
+        kicker="Publication · 论文"
+        title={<>让每一次探索，<br />留下可被验证的成果。</>}
+        description="我们正在整理社区参与完成的论文与研究工作。正式文献、代码与项目链接将在核对后陆续发布。"
+      />
+      <section className="publication-pending" aria-labelledby="publication-status">
+        <div className="pending-mark"><Sparkle size={30} weight="light" aria-hidden="true" /></div>
+        <div><p className="status-label">Collection in progress</p><h2 id="publication-status">成果整理中</h2></div>
+        <p>这里将按年份展示论文题目、作者、发表 venue，以及可用的论文、代码和项目链接。</p>
+      </section>
+      <section className="publication-preview" aria-hidden="true">
+        <div className="preview-filter"><span>YEAR</span><span>ALL</span></div>
+        {[0, 1, 2].map((item) => <div className="preview-row" key={item}><span /><span /><span /></div>)}
+      </section>
+    </div>
+  );
+}
+
+function MemberCard({ member }) {
+  const { name, summary, url, image } = member;
+  return (
+    <article className="member-card">
+      <div className="member-avatar">
+        {image ? <img src={image} alt={`${name}的照片`} /> : <span aria-label={`${name}的占位头像`}>{name}</span>}
+      </div>
+      <div className="member-info"><h3>{name}</h3><p>{summary}</p></div>
+      {url && <a href={url} target="_blank" rel="noreferrer" aria-label={`访问${name}的个人页面`}><ArrowUpRight size={19} /></a>}
+    </article>
+  );
+}
+
+function MemberGroup({ title, en, people }) {
+  return (
+    <section className="member-group">
+      <div className="group-heading"><p>{en}</p><h2>{title}</h2><span>{people.length} 位</span></div>
+      <div className="member-grid">{people.map((person) => <MemberCard key={person.name} member={person} />)}</div>
+    </section>
+  );
+}
+
+function MembersPage() {
+  return (
+    <div className="page page-members">
+      <PageHero
+        kicker="Members · 成员"
+        title={<>优秀的同行，<br />是社区最好的证明。</>}
+        description="我们因共同的研究兴趣相遇，在开放协作中学习、实验与成长。去向不是终点，而是同行经历留下的坐标。"
+      />
+      <MemberGroup title="负责人" en="LEADERS" people={leaders} />
+      <MemberGroup title="成员" en="MEMBERS" people={members} />
+    </div>
+  );
+}
+
+function RecruitmentPage() {
+  return (
+    <div className="page page-recruitment">
+      <PageHero
+        kicker="Recruitment · 招募"
+        title={<>带着好奇心来，<br />和我们一起把问题做深。</>}
+        description="JLULLM 面向所有高校招募对 AI 研究有持续兴趣的同学。我们在线协作，不以已有论文或成熟课题作为加入门槛。"
+      />
+      <section className="recruitment-layout">
+        <div className="criteria-panel">
+          <p className="panel-label">What we value · 我们看重</p>
+          {recruitmentCriteria.map(([title, copy]) => (
+            <article className="criterion" key={title}><Check size={18} weight="bold" aria-hidden="true" /><div><h2>{title}</h2><p>{copy}</p></div></article>
           ))}
-        </nav>
-      </header>
+        </div>
+        <div className="collaboration-panel">
+          <p className="panel-label">How we work · 如何协作</p>
+          <h2>线上实验室，<br />真实的研究协作。</h2>
+          <p>围绕明确的问题组成小组，通过定期讨论、论文阅读、实验复现与写作审阅共同推进。参与者来自不同高校，协作以可靠、透明和长期投入为基础。</p>
+          <div className="process-list">
+            <div><span>01</span><strong>提交申请</strong><p>介绍你的背景、兴趣与可投入时间。</p></div>
+            <div><span>02</span><strong>相互了解</strong><p>围绕研究兴趣进行一次线上交流。</p></div>
+            <div><span>03</span><strong>加入协作</strong><p>匹配方向与伙伴，从小而清晰的问题开始。</p></div>
+          </div>
+          <button className="button button-disabled" type="button" disabled>问卷准备中</button>
+          <p className="pending-note">在线申请问卷将在准备完成后开放。</p>
+        </div>
+      </section>
+    </div>
+  );
+}
 
-      <main>
-        <section className="hero" id="home">
-          <div className="hero-copy">
-            <h1>科研，<br />不必一个人开始</h1>
-            <p className="hero-lede">和志同道合的吉林大学同学，<br />一起把 AI 想法做成真正的研究。</p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#join">申请加入 <ArrowRight size={18} weight="bold" /></a>
-              <a className="text-link" href="#members">查看社区故事 <ArrowRight size={17} /></a>
-            </div>
-          </div>
-          <div className="hero-visual" aria-label="由论文、代码与实验笔记构成的共享研究桌">
-            <img src="./hero-research-table.png" alt="共享研究桌上的论文、代码、公式草稿与实验笔记" />
-          </div>
-          <div className="research-path" aria-label="社区科研路径">
-            {stages.map(({ icon: Icon, title, copy }, index) => (
-              <article className="path-step" key={title}>
-                <span className="step-number">{String(index + 1).padStart(2, "0")}</span>
-                <div className="step-heading"><Icon size={27} aria-hidden="true" /><h2>{title}</h2></div>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+function ContactPage() {
+  return (
+    <div className="page page-contact">
+      <section className="contact-stage">
+        <p className="page-kicker">Contact · 联系</p>
+        <h1>让一个值得研究的想法，<br />成为合作的开始。</h1>
+        <p>如果你希望与 JLULLM 探讨研究合作、学术交流或社区共建，欢迎通过公开邮箱与我们联系。</p>
+        <button className="contact-placeholder" type="button" disabled>
+          <EnvelopeSimple size={25} weight="light" aria-hidden="true" />
+          <span><small>PUBLIC EMAIL</small>邮箱准备中</span>
+        </button>
+      </section>
+      <aside className="contact-aside" aria-label="合作理念">
+        <UsersThree size={32} weight="light" aria-hidden="true" />
+        <p>我们相信，好的合作始于坦诚的问题、清晰的投入和彼此尊重的长期同行。</p>
+      </aside>
+    </div>
+  );
+}
 
-        <section className="proof-strip" aria-label="成员去向概览">
-          <div className="proof-destinations">
-            <div className="proof-heading"><h2>从 JLULLM 出发</h2><ArrowRight size={22} aria-hidden="true" /></div>
-            <p className="proof-label">我们的共同目的地</p>
-            <p>985 高校 · 海外高校 · 科技大厂</p>
-          </div>
-          <div className="proof-members">
-            <p className="proof-label">我们的成员去往</p>
-            <p>吉林大学 · 浙江大学 · 中山大学 · 清华大学 · 南京大学 · 悉尼大学 · 字节跳动 · 腾讯 · 阿里巴巴</p>
-          </div>
-        </section>
+const pages = {
+  home: HomePage,
+  research: ResearchPage,
+  publication: PublicationPage,
+  members: MembersPage,
+  recruitment: RecruitmentPage,
+  contact: ContactPage,
+};
 
-        <section className="research-section" id="research">
-          <div className="section-intro">
-            <p className="section-kicker">我们在做什么</p><h2>从一个值得追问的问题开始。</h2>
-            <p>我们不是课程社群，也不是比赛组队群。这里更关心长期的研究兴趣、可靠的实验和能够被验证的结论。</p>
-          </div>
-          <div className="area-list">
-            {researchAreas.map(([number, title, description]) => (
-              <article className="area-row" key={number}>
-                <span>{number}</span><h3>{title}</h3><p>{description}</p><ArrowRight size={22} aria-hidden="true" />
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="members-section" id="members">
-          <div className="section-intro">
-            <p className="section-kicker">社区成员</p><h2>优秀的同行，是社区最好的证明。</h2>
-            <p>过去参与社区建设的成员，继续在高校与产业一线探索 AI。去向不是终点，而是共同成长留下的坐标。</p>
-          </div>
-          <div className="member-list" role="list" aria-label="社区成员与去向">
-            {members.map(([name, destination]) => (
-              <div className="member-row" role="listitem" key={name}>
-                <strong>{name}</strong><span>{destination}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="join-section" id="join">
-          <div><p className="section-kicker">加入 JLULLM</p><h2>带着你的好奇心来。</h2></div>
-          <div className="join-copy">
-            <p>不要求你已经有论文或成熟课题。我们更期待：愿意长期投入、尊重实验事实、乐于分享，也愿意和伙伴一起把问题做深。</p>
-            <ul><li>吉林大学在读同学</li><li>对 AI 研究有持续兴趣</li><li>愿意稳定投入并开放协作</li></ul>
-            <button className="button button-primary copy-button" type="button" onClick={copyApplication}>
-              {copied ? <Check size={19} weight="bold" /> : <Copy size={19} />}{copied ? "申请模板已复制" : "复制申请模板"}
-            </button>
-            <p className="join-note">申请入口即将公布；你可以先准备好这份简短自我介绍。</p>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <div className="brand footer-brand"><strong>JLULLM</strong><span>吉林大学 AI 科研社区</span></div>
-        <p>以同行连接想法，以研究抵达更远。</p><p>© {new Date().getFullYear()} JLULLM Community</p>
-      </footer>
+export function App() {
+  const currentPage = getCurrentPage();
+  const CurrentPage = pages[currentPage];
+  return (
+    <div className={`site-shell page-${currentPage}-shell`}>
+      <Header currentPage={currentPage} />
+      <main><CurrentPage /></main>
+      <Footer currentPage={currentPage} />
     </div>
   );
 }
