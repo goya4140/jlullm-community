@@ -93,24 +93,25 @@ button:disabled { cursor: not-allowed; }
 .preview-row span { height: 7px; display: block; background: #d9dbd8; border-radius: 10px; }
 .preview-row span:nth-child(2) { height: 11px; }
 
-.page-members { background: var(--ink); color: var(--white); }
-.page-members .page-hero { border-color: #343738; }
-.page-members .page-kicker, .page-members .page-description { color: #aeb2b3; }
+.page-members { background: var(--paper); color: var(--ink); }
+.page-members .page-hero { border-color: var(--line); }
+.page-members .page-kicker, .page-members .page-description { color: var(--muted); }
 .member-group { padding: 75px var(--content-pad) 30px; }
 .member-group:last-child { padding-bottom: 130px; }
 .group-heading { display: grid; grid-template-columns: 1fr 1fr auto; align-items: end; margin-bottom: 34px; }
-.group-heading p { margin: 0; color: #929697; font-size: 10px; letter-spacing: .16em; }
+.group-heading p { margin: 0; color: var(--blue); font-size: 10px; font-weight: 650; letter-spacing: .16em; }
 .group-heading h2 { margin: 0; font-size: clamp(30px, 3vw, 44px); }
-.group-heading > span { color: #929697; font-size: 12px; }
-.member-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #4c4f50; border-left: 1px solid #353839; }
-.member-card { position: relative; min-width: 0; padding: 24px; border-right: 1px solid #353839; border-bottom: 1px solid #353839; }
-.member-avatar { aspect-ratio: 1 / 1.08; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #202324, #17191a); color: #727677; }
+.group-heading > span { color: var(--soft); font-size: 12px; }
+.member-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); border-left: 1px solid var(--line); }
+.member-card { position: relative; min-width: 0; padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.member-avatar { aspect-ratio: 1 / 1.08; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #eeefec, #e3e5e1); color: #777b7d; }
 .member-avatar span { font-size: clamp(22px, 2.2vw, 34px); font-weight: 600; letter-spacing: .15em; text-indent: .15em; }
 .member-avatar img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); }
 .member-info { padding-top: 22px; }
 .member-info h3 { margin: 0; font-size: 19px; font-weight: 630; }
-.member-info p { min-height: 24px; margin: 8px 0 0; color: #aeb2b3; font-size: 13px; }
-.member-card > a { position: absolute; right: 24px; bottom: 23px; color: #aeb2b3; }
+.member-info p { min-height: 24px; margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+.member-card > a { position: absolute; right: 24px; bottom: 23px; color: var(--soft); }
+.member-card > a:hover { color: var(--blue); }
 
 .recruitment-layout { padding: 0 var(--content-pad) 140px; display: grid; grid-template-columns: .85fr 1.15fr; }
 .criteria-panel, .collaboration-panel { padding-top: 70px; }
@@ -148,13 +149,6 @@ footer { min-height: 190px; padding: 48px var(--content-pad); display: grid; gri
 .footer-nav { display: flex; flex-wrap: wrap; gap: 14px 24px; }
 .footer-nav a:hover { color: var(--ink); }
 .copyright { margin: 0; white-space: nowrap; }
-.page-members-shell footer { background: #17191a; color: #929697; border-color: #292b2c; }
-.page-members-shell .footer-brand strong, .page-members-shell .footer-brand span { color: #fff; }
-.page-members-shell .site-header .brand strong,
-.page-members-shell .site-header .brand span,
-.page-members-shell .nav-links a { color: #f2f3f2; }
-.page-members-shell .nav-links a small { color: #8f9394; }
-.page-members-shell .nav-links a::after { background: #fff; }
 
 @media (max-width: 1120px) {
   :root { --content-pad: var(--page-pad); }
@@ -174,8 +168,6 @@ footer { min-height: 190px; padding: 48px var(--content-pad); display: grid; gri
   .nav-links a { width: 100%; padding: 15px 0; display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); font-size: 21px; }
   .nav-links a small { display: inline; font-size: 9px; }
   .nav-links a::after { display: none; }
-  .page-members-shell .nav-links { background: rgba(17,19,20,.99); }
-  .page-members-shell .menu-toggle { color: #fff; }
   .hero { min-height: auto; padding-top: 112px; grid-template-columns: 1fr; }
   .hero-copy { padding: 0 0 54px; }
   .hero-visual { position: relative; width: calc(100% + var(--page-pad) * 2); height: min(58vw, 460px); margin-left: calc(var(--page-pad) * -1); }
