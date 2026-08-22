@@ -63,8 +63,8 @@ const researchAreas = [
 ];
 
 const leaders = [
-  { name: "林景豪", summary: "JLULLM 社区负责人", url: "", image: "" },
-  { name: "王淏", summary: "JLULLM 社区负责人", url: "", image: "" },
+  { name: "林景豪", summary: "字节跳动", url: "", image: "" },
+  { name: "王淏", summary: "悉尼大学", url: "", image: "" },
 ];
 
 const members = [
