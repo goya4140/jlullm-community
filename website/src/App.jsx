@@ -186,8 +186,8 @@ function Header({ currentPage }) {
 
   return (
     <header className="site-header" aria-label="主导航">
-      <a className="brand" href={href()} aria-label="JLULLM 首页">
-        <strong>JLULLM</strong><span aria-hidden="true">·</span><span>吉林大学 AI 科研社区</span>
+      <a className="brand" href={href()} aria-label="LifeLibra Lab 首页">
+        <strong>LifeLibra Lab</strong><span aria-hidden="true">·</span><span>开放 AI 科研社区</span>
       </a>
       <button
         className="menu-toggle"
@@ -221,13 +221,13 @@ function Footer({ currentPage }) {
   return (
     <footer>
       <div className="footer-main">
-        <a className="brand footer-brand" href={href()}><strong>JLULLM</strong><span>吉林大学 AI 科研社区</span></a>
+        <a className="brand footer-brand" href={href()}><strong>LifeLibra Lab</strong><span>开放 AI 科研社区</span></a>
         <p>以同行连接想法，以研究抵达更远。</p>
       </div>
       <nav className="footer-nav" aria-label="页脚导航">
         {routes.slice(1).map((route) => <a key={route.id} href={href(route.slug)}>{route.en}</a>)}
       </nav>
-      <p className="copyright">© {new Date().getFullYear()} JLULLM Community</p>
+      <p className="copyright">© {new Date().getFullYear()} LifeLibra Lab</p>
     </footer>
   );
 }
@@ -247,9 +247,9 @@ function HomePage() {
   return (
     <section className="hero hero-home" aria-labelledby="home-title">
       <div className="hero-copy">
-        <p className="eyebrow">JLULLM · AI Research Community</p>
+        <p className="eyebrow">LifeLibra Lab · Open AI Research Community</p>
         <h1 id="home-title">科研，<br />不必一个人开始</h1>
-        <p className="hero-lede">和志同道合的同学，<br />一起把 AI 想法做成真正的研究。</p>
+        <p className="hero-lede">和志同道合的伙伴，<br />一起把 AI 想法做成真正的研究。</p>
         <div className="hero-actions">
           <a className="button button-primary" href={href("recruitment")}>申请加入 <ArrowRight size={18} weight="bold" /></a>
           <a className="text-link" href={href("research")}>了解研究 <ArrowRight size={17} /></a>
@@ -365,7 +365,7 @@ function RecruitmentPage() {
       <PageHero
         kicker="Recruitment · 招募"
         title={<>带着好奇心来，<br />和我们一起把问题做深。</>}
-        description="JLULLM 面向所有高校招募对 AI 研究有持续兴趣的同学。我们在线协作，不以已有论文或成熟课题作为加入门槛。"
+        description="LifeLibra Lab 面向所有对 AI 研究有持续兴趣的人。我们在线协作，不限制学校、专业或当前身份，也不以已有论文或成熟课题作为加入门槛。"
       />
       <section className="recruitment-layout">
         <div className="criteria-panel">
@@ -377,7 +377,7 @@ function RecruitmentPage() {
         <div className="collaboration-panel">
           <p className="panel-label">How we work · 如何协作</p>
           <h2>线上实验室，<br />真实的研究协作。</h2>
-          <p>围绕明确的问题组成小组，通过定期讨论、论文阅读、实验复现与写作审阅共同推进。参与者来自不同高校，协作以可靠、透明和长期投入为基础。</p>
+          <p>围绕明确的问题组成小组，通过定期讨论、论文阅读、实验复现与写作审阅共同推进。参与者可以来自不同地区、专业与职业阶段，协作以可靠、透明和长期投入为基础。</p>
           <div className="process-list">
             <div><span>01</span><strong>提交申请</strong><p>介绍你的背景、兴趣与可投入时间。</p></div>
             <div><span>02</span><strong>相互了解</strong><p>围绕研究兴趣进行一次线上交流。</p></div>
@@ -397,7 +397,7 @@ function ContactPage() {
       <section className="contact-stage">
         <p className="page-kicker">Contact · 联系</p>
         <h1>让一个值得研究的想法，<br />成为合作的开始。</h1>
-        <p>如果你希望与 JLULLM 探讨研究合作、学术交流或社区共建，欢迎通过公开邮箱与我们联系。</p>
+        <p>如果你希望与 LifeLibra Lab 探讨研究合作、学术交流或社区共建，欢迎通过公开邮箱与我们联系。</p>
         <button className="contact-placeholder" type="button" disabled>
           <EnvelopeSimple size={25} weight="light" aria-hidden="true" />
           <span><small>PUBLIC EMAIL</small>邮箱准备中</span>

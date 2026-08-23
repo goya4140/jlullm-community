@@ -1,4 +1,4 @@
-name: Deploy JLULLM site to GitHub Pages
+name: Deploy LifeLibra Lab site to GitHub Pages
 
 on:
   push:
