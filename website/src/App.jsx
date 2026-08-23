@@ -67,7 +67,7 @@ const leaders = [
 ];
 
 const members = [
-  { name: "王邻皓", summary: "LifeLibra Lab 成员", url: "", image: "" },
+  { name: "王邻皓", summary: "吉林大学", url: "", image: "" },
   { name: "吴天润", summary: "浙江大学", url: "", image: "" },
   { name: "郭媛媛", summary: "中山大学", url: "", image: "" },
   { name: "李昱辰", summary: "清华大学", url: "", image: "" },
