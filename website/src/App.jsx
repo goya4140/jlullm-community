@@ -67,6 +67,7 @@ const leaders = [
 ];
 
 const members = [
+  { name: "王邻皓", summary: "LifeLibra Lab 成员", url: "", image: "" },
   { name: "吴天润", summary: "浙江大学", url: "", image: "" },
   { name: "郭媛媛", summary: "中山大学", url: "", image: "" },
   { name: "李昱辰", summary: "清华大学", url: "", image: "" },
@@ -383,8 +384,15 @@ function RecruitmentPage() {
             <div><span>02</span><strong>相互了解</strong><p>围绕研究兴趣进行一次线上交流。</p></div>
             <div><span>03</span><strong>加入协作</strong><p>匹配方向与伙伴，从小而清晰的问题开始。</p></div>
           </div>
-          <button className="button button-disabled" type="button" disabled>问卷准备中</button>
-          <p className="pending-note">在线申请问卷将在准备完成后开放。</p>
+          <a
+            className="button button-primary application-link"
+            href="https://docs.qq.com/form/page/DUnpyd0diREVORHRI"
+            target="_blank"
+            rel="noreferrer"
+          >
+            填写申请 <ArrowUpRight size={17} weight="bold" aria-hidden="true" />
+          </a>
+          <p className="pending-note">申请信息将通过腾讯文档收集，请按表单提示填写。</p>
         </div>
       </section>
     </div>
@@ -398,10 +406,11 @@ function ContactPage() {
         <p className="page-kicker">Contact · 联系</p>
         <h1>让一个值得研究的想法，<br />成为合作的开始。</h1>
         <p>如果你希望与 LifeLibra Lab 探讨研究合作、学术交流或社区共建，欢迎通过公开邮箱与我们联系。</p>
-        <button className="contact-placeholder" type="button" disabled>
+        <a className="contact-email" href="mailto:wanglinhao4140@gmail.com">
           <EnvelopeSimple size={25} weight="light" aria-hidden="true" />
-          <span><small>PUBLIC EMAIL</small>邮箱准备中</span>
-        </button>
+          <span><small>PUBLIC EMAIL</small>wanglinhao4140@gmail.com</span>
+          <ArrowUpRight size={18} weight="bold" aria-hidden="true" />
+        </a>
       </section>
       <aside className="contact-aside" aria-label="合作理念">
         <UsersThree size={32} weight="light" aria-hidden="true" />
