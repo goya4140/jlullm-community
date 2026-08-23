@@ -9,7 +9,6 @@ import {
   Heartbeat,
   List,
   Robot,
-  Sparkle,
   UsersThree,
   X,
 } from "@phosphor-icons/react";
@@ -83,6 +82,79 @@ const recruitmentCriteria = [
   ["持续投入", "能够为一个研究问题留出稳定时间，接受研究中的反复与不确定。"],
   ["尊重事实", "重视实验、记录与复现，让结论经得起讨论和验证。"],
   ["开放协作", "愿意分享过程、回应反馈，也愿意帮助伙伴把工作共同推进。"],
+];
+
+const publications = [
+  {
+    year: "2026",
+    title: "Language-Guided Medical Image Segmentation with Target-Informed Multi-Level Contrastive Alignments",
+    pub: "Expert Systems with Applications, Article 133507",
+    authors: "Mingjian Li, Mingyuan Meng, Shuchang Ye, Mingye Zou, Michael Fulham, Lei Bi, Jinman Kim",
+    url: "https://doi.org/10.1016/j.eswa.2026.133507",
+  },
+  {
+    year: "2026",
+    title: "Group-wise Data Ordering: Enhancing Instruction Tuning of Large Language Models via Embedding Proximity",
+    pub: "International Conference on Machine Learning (ICML 2026)",
+    authors: "Yiwen Ye, Boyuan Jiang, Xiaobin Hu, Shengzhi Wang, Xiaozhong Ji, Jinghao Lin, Deli Yu, Jiale Chen, Kai Wu, Haihua Yang, Yong Xia",
+    url: "https://icml.cc/virtual/2026/poster/62875",
+  },
+  {
+    year: "2026",
+    title: "Dynamic Traceback Learning for Medical Report Generation",
+    pub: "IEEE Transactions on Multimedia, Early Access",
+    authors: "Shuchang Ye, Mingyuan Meng, Mingjian Li, Dagan Feng, Usman Naseem, Jinman Kim",
+    url: "https://doi.org/10.1109/TMM.2026.3668644",
+  },
+  {
+    year: "2026",
+    title: "Enhancing LLM-Based Recommendation with Semantic-Aligned Collaborative Knowledge",
+    pub: "Database Systems for Advanced Applications (DASFAA 2026), LNCS 16535, 405–421",
+    authors: "Zihan Wang, Jinghao Lin, Xiaocui Yang, Yongkang Liu, Shi Feng, Daling Wang, Yifei Zhang, Ge Yu",
+    url: "https://doi.org/10.1007/978-981-92-0363-5_25",
+  },
+  {
+    year: "2025",
+    title: "Alleviating Textual Reliance in Medical Language-Guided Segmentation via Prototype-Driven Semantic Approximation",
+    pub: "IEEE/CVF International Conference on Computer Vision (ICCV 2025), 22316–22326",
+    authors: "Shuchang Ye, Usman Naseem, Mingyuan Meng, Jinman Kim",
+    url: "https://doi.org/10.1109/ICCV51701.2025.02072",
+  },
+  {
+    year: "2025",
+    title: "RRHF-V: Ranking Responses to Mitigate Hallucinations in Multimodal Large Language Models with Human Feedback",
+    pub: "31st International Conference on Computational Linguistics (COLING 2025), 6798–6815",
+    authors: "Guoqing Chen, Fu Zhang, Jinghao Lin, Chenglong Lu, Jingwei Cheng",
+    url: "https://aclanthology.org/2025.coling-main.454/",
+  },
+  {
+    year: "2024",
+    title: "SALMON: A Structure-Aware Language Model with Logicality and Densification Strategy for Temporal Knowledge Graph Reasoning",
+    pub: "Findings of the Association for Computational Linguistics: EMNLP 2024, 8761–8774",
+    authors: "Fu Zhang, Jinghao Lin, Jingwei Cheng",
+    url: "https://doi.org/10.18653/v1/2024.findings-emnlp.511",
+  },
+  {
+    year: "2024",
+    title: "A Causal Approach to Mitigate Modality Preference Bias in Medical Visual Question Answering",
+    pub: "1st International Workshop on Vision-Language Models for Biomedical Applications (VLM4Bio ’24), 13–17",
+    authors: "Shuchang Ye, Usman Naseem, Mingyuan Meng, Dagan Feng, Jinman Kim",
+    url: "https://doi.org/10.1145/3689096.3689459",
+  },
+  {
+    year: "2024",
+    title: "Enabling Text-Free Inference in Language-Guided Segmentation of Chest X-Rays via Self-guidance",
+    pub: "Medical Image Computing and Computer Assisted Intervention (MICCAI 2024), LNCS 15008, 242–252",
+    authors: "Shuchang Ye, Mingyuan Meng, Mingjian Li, Dagan Feng, Jinman Kim",
+    url: "https://doi.org/10.1007/978-3-031-72111-3_23",
+  },
+  {
+    year: "2024",
+    title: "Joint Framework for Tensor Decomposition-Based Temporal Knowledge Graph Completion",
+    pub: "Information Sciences, 654:119853",
+    authors: "Fu Zhang, Hongzhi Chen, Yuzhe Shi, Jingwei Cheng, Jinghao Lin",
+    url: "https://doi.org/10.1016/j.ins.2023.119853",
+  },
 ];
 
 function getCurrentPage() {
@@ -213,21 +285,39 @@ function ResearchPage() {
 }
 
 function PublicationPage() {
+  const years = [...new Set(publications.map(({ year }) => year))];
+
   return (
     <div className="page page-publication">
       <PageHero
         kicker="Publication · 论文"
         title={<>让每一次探索，<br />留下可被验证的成果。</>}
-        description="我们正在整理社区参与完成的论文与研究工作。正式文献、代码与项目链接将在核对后陆续发布。"
+        description="这里收录社区成员参与完成并已正式发表的论文与研究工作，按发表时间由近及远排列。"
       />
-      <section className="publication-pending" aria-labelledby="publication-status">
-        <div className="pending-mark"><Sparkle size={30} weight="light" aria-hidden="true" /></div>
-        <div><p className="status-label">Collection in progress</p><h2 id="publication-status">成果整理中</h2></div>
-        <p>这里将按年份展示论文题目、作者、发表 venue，以及可用的论文、代码和项目链接。</p>
-      </section>
-      <section className="publication-preview" aria-hidden="true">
-        <div className="preview-filter"><span>YEAR</span><span>ALL</span></div>
-        {[0, 1, 2].map((item) => <div className="preview-row" key={item}><span /><span /><span /></div>)}
+      <section className="publication-list" aria-label="论文列表">
+        {years.map((year) => (
+          <section className="publication-year" key={year} aria-labelledby={`publication-${year}`}>
+            <header className="publication-year-heading">
+              <p>PUBLICATIONS</p>
+              <h2 id={`publication-${year}`}>{year}</h2>
+              <span>{publications.filter((paper) => paper.year === year).length} PAPERS</span>
+            </header>
+            <div className="publication-rows">
+              {publications.filter((paper) => paper.year === year).map((paper, index) => (
+                <article className="publication-row" key={paper.title}>
+                  <span className="publication-index">{String(index + 1).padStart(2, "0")}</span>
+                  <div className="publication-main">
+                    <h3><a href={paper.url} target="_blank" rel="noreferrer">{paper.title}<ArrowUpRight size={18} aria-hidden="true" /></a></h3>
+                    <dl>
+                      <div><dt>Pub</dt><dd>{paper.pub}</dd></div>
+                      <div><dt>Authors</dt><dd>{paper.authors}</dd></div>
+                    </dl>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
       </section>
     </div>
   );
