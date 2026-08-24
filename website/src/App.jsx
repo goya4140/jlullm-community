@@ -373,7 +373,7 @@ function RecruitmentPage() {
           </div>
           <a
             className="button button-primary application-link"
-            href="https://goya4140.github.io/jlullm-community/research/"
+            href="https://docs.qq.com/form/page/DUkFIbHhKV3NjUnRE"
             target="_blank"
             rel="noreferrer"
           >
