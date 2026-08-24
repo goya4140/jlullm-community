@@ -161,7 +161,7 @@ function useSiteLinks(currentPage) {
 
 function Header({ currentPage }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { href } = useSiteLinks(currentPage);
+  const { href, root } = useSiteLinks(currentPage);
 
   useEffect(() => {
     document.body.classList.toggle("menu-is-open", menuOpen);
@@ -176,7 +176,8 @@ function Header({ currentPage }) {
   return (
     <header className="site-header" aria-label="主导航">
       <a className="brand" href={href()} aria-label="LifeLibra Lab 首页">
-        <strong>LifeLibra Lab</strong><span aria-hidden="true">·</span><span>开放 AI 科研社区</span>
+        <span className="brand-logo" aria-hidden="true"><img src={`${root}lifelibra-logo.png`} alt="" /></span>
+        <span className="brand-tagline">开放 AI 科研社区</span>
       </a>
       <button
         className="menu-toggle"
@@ -206,11 +207,14 @@ function Header({ currentPage }) {
 }
 
 function Footer({ currentPage }) {
-  const { href } = useSiteLinks(currentPage);
+  const { href, root } = useSiteLinks(currentPage);
   return (
     <footer>
       <div className="footer-main">
-        <a className="brand footer-brand" href={href()}><strong>LifeLibra Lab</strong><span>开放 AI 科研社区</span></a>
+        <a className="brand footer-brand" href={href()} aria-label="LifeLibra Lab 首页">
+          <span className="brand-logo" aria-hidden="true"><img src={`${root}lifelibra-logo.png`} alt="" /></span>
+          <span className="brand-tagline">开放 AI 科研社区</span>
+        </a>
         <p>以同行连接想法，以研究抵达更远。</p>
       </div>
       <nav className="footer-nav" aria-label="页脚导航">

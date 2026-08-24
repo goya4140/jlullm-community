@@ -35,9 +35,10 @@ button:disabled { cursor: not-allowed; }
   padding: 0 clamp(24px, 3.4vw, 52px); display: flex; align-items: center; justify-content: space-between;
 }
 .page-home-shell .site-header { background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.68) 70%, transparent); }
-.brand { display: flex; align-items: baseline; gap: 12px; white-space: nowrap; }
-.brand strong { font-size: clamp(22px, 2.1vw, 30px); line-height: 1; letter-spacing: -0.045em; }
-.brand span { font-size: 15px; color: var(--muted); }
+.brand { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
+.brand-logo { position: relative; width: 190px; height: 56px; display: block; flex: 0 0 auto; overflow: hidden; }
+.brand-logo img { position: absolute; top: -51px; left: 50%; width: 218px; max-width: none; height: auto; display: block; transform: translateX(-50%); }
+.brand-tagline { color: var(--muted); font-size: 13px; }
 .nav-links { position: absolute; right: clamp(24px, 3.4vw, 52px); display: flex; align-items: center; gap: clamp(18px, 2.2vw, 36px); }
 .nav-links a { position: relative; padding: 29px 0 12px; display: grid; gap: 1px; font-size: 13px; color: var(--muted); }
 .nav-links a small { color: #85898b; font-size: 8px; font-weight: 540; letter-spacing: .05em; }
@@ -159,7 +160,6 @@ button:disabled { cursor: not-allowed; }
 footer { min-height: 190px; padding: 48px var(--content-pad); display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 50px; align-items: end; background: var(--blue-pale); color: var(--muted); font-size: 11px; border-top: 1px solid var(--line); }
 .footer-main p { margin: 20px 0 0; }
 .footer-brand { align-items: center; }
-.footer-brand strong { color: var(--ink); font-size: 24px; }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 14px 24px; }
 .footer-nav a:hover { color: var(--blue); }
 .copyright { margin: 0; white-space: nowrap; }
@@ -167,7 +167,7 @@ footer { min-height: 190px; padding: 48px var(--content-pad); display: grid; gri
 @media (max-width: 1120px) {
   :root { --content-pad: var(--page-pad); }
   .site-header { height: 78px; }
-  .brand > span:not([aria-hidden]) { display: none; }
+  .brand-tagline { display: none; }
   .nav-links { gap: 18px; }
   .nav-links a small { display: none; }
   .member-grid { grid-template-columns: repeat(3, 1fr); }
@@ -206,6 +206,8 @@ footer { min-height: 190px; padding: 48px var(--content-pad); display: grid; gri
 
 @media (max-width: 520px) {
   :root { --page-pad: 20px; }
+  .brand-logo { width: 154px; height: 45px; }
+  .brand-logo img { top: -41px; width: 176px; }
   .hero { padding-top: 110px; padding-bottom: 50px; }
   .hero h1 { margin-top: 14px; font-size: clamp(44px, 12vw, 52px); }
   .hero-lede br { display: none; }
