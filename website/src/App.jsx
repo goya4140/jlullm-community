@@ -25,39 +25,39 @@ const routes = [
 const researchAreas = [
   {
     number: "01",
-    title: "大语言模型",
-    en: "Large Language Models",
-    icon: Brain,
-    question: "如何让语言模型真正理解复杂任务，而不只是生成看似合理的答案？",
-    method: "我们关注训练、推理与评测方法，研究模型能力的边界、可靠性与高效适配。",
-    value: "让语言智能成为能够被验证、复现和持续改进的研究工具。",
+    title: "智能体系统工程",
+    en: "Agent Harness",
+    icon: Robot,
+    question: "像 Codex 这样的智能体系统是如何构建的，又为何能够充分释放基础模型的潜力？",
+    method: "我们研究上下文组织、工具调用、任务规划、记忆、反馈回路与运行环境，分析模型能力如何被可靠地转化为长期行动。",
+    value: "形成可复现、可评测的智能体系统方法，让强大的模型能力真正服务于复杂任务。",
   },
   {
     number: "02",
-    title: "智能体",
-    en: "Agent",
-    icon: Robot,
-    question: "模型怎样才能主动规划、调用工具，并在真实环境中完成长期任务？",
-    method: "我们探索任务分解、记忆、工具使用、多智能体协作与环境反馈机制。",
-    value: "构建能够行动、反思并与人协同的下一代智能系统。",
+    title: "智能体训练",
+    en: "Agent Training",
+    icon: Brain,
+    question: "模型如何从随机初始化的参数出发，通过数据与训练算法逐步获得推理、行动与协作能力？",
+    method: "我们关注预训练、后训练、强化学习、过程监督与合成数据，探索智能体能力形成和持续提升的机制。",
+    value: "理解并改进智能体的学习过程，让模型在真实任务中更聪明、更稳定，也更容易被验证。",
   },
   {
     number: "03",
-    title: "多模态",
-    en: "Multimodal Intelligence",
-    icon: CirclesThreePlus,
-    question: "机器如何像人一样联合理解文字、图像、声音与真实世界信号？",
-    method: "我们研究跨模态表示、对齐、生成与推理，让不同信息来源相互补充。",
-    value: "帮助 AI 从单一文本走向对复杂世界的整体理解。",
+    title: "可信医学视觉语言推理",
+    en: "Reliable Medical VLM Reasoning",
+    icon: Heartbeat,
+    question: "医学视觉语言模型如何依据临床指南与可追溯证据进行推理，而不是给出缺乏依据的诊断？",
+    method: "我们通过指南对齐、证据检索、推理过程监督与可靠性评测，训练模型将医学影像、临床信息和权威知识联系起来。",
+    value: "让模型的诊断建议更有依据、更可解释，并能够接受临床人员的审查与验证。",
   },
   {
     number: "04",
-    title: "医学人工智能",
-    en: "AI for Medicine",
-    icon: Heartbeat,
-    question: "AI 如何从医学数据中学习，并为真实的临床与健康问题提供可信帮助？",
-    method: "我们连接医学影像、多模态数据与临床问题，关注可解释、可泛化的医学智能。",
-    value: "以严谨的方法推动 AI 在医学研究与健康场景中的可靠应用。",
+    title: "边缘适配医学视觉语言模型",
+    en: "Edge-Adaptation Medical VLM",
+    icon: CirclesThreePlus,
+    question: "医院如何在保护本地数据的前提下，让通用医学模型快速适配特定疾病、设备与人群？",
+    method: "我们设计轻量参数更新、数据高效学习与本地部署框架，使模型能够利用有限院内数据快速完成专病适配。",
+    value: "降低医学模型落地与维护成本，让不同医院都能构建贴合自身临床场景的智能工具。",
   },
 ];
 
@@ -269,7 +269,7 @@ function ResearchPage() {
       <PageHero
         kicker="Research · 研究"
         title={<>从值得追问的问题，<br />走向可靠的研究。</>}
-        description="我们围绕语言、行动、多模态与医学四个方向开展探索。方向会演进，但问题意识、实验事实与可复现性始终是共同的方法。"
+        description="我们围绕智能体系统、训练方法、可信医学推理与本地快速适配开展探索。方向会演进，但问题意识、实验事实与可复现性始终是共同的方法。"
       />
       <section className="research-grid" aria-label="研究方向">
         {researchAreas.map(({ number, title, en, icon: Icon, question, method, value }) => (
