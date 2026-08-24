@@ -131,13 +131,6 @@ const publications = [
   },
   {
     year: "2024",
-    title: "A Causal Approach to Mitigate Modality Preference Bias in Medical Visual Question Answering",
-    pub: "1st International Workshop on Vision-Language Models for Biomedical Applications (VLM4Bio ’24), 13–17",
-    authors: "Shuchang Ye, Usman Naseem, Mingyuan Meng, Dagan Feng, Jinman Kim",
-    url: "https://doi.org/10.1145/3689096.3689459",
-  },
-  {
-    year: "2024",
     title: "Enabling Text-Free Inference in Language-Guided Segmentation of Chest X-Rays via Self-guidance",
     pub: "Medical Image Computing and Computer Assisted Intervention (MICCAI 2024), LNCS 15008, 242–252",
     authors: "Shuchang Ye, Mingyuan Meng, Mingjian Li, Dagan Feng, Jinman Kim",
