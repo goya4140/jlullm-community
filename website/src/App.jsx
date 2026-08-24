@@ -88,13 +88,6 @@ const recruitmentCriteria = [
 const publications = [
   {
     year: "2026",
-    title: "Language-Guided Medical Image Segmentation with Target-Informed Multi-Level Contrastive Alignments",
-    pub: "Expert Systems with Applications, Article 133507",
-    authors: "Mingjian Li, Mingyuan Meng, Shuchang Ye, Mingye Zou, Michael Fulham, Lei Bi, Jinman Kim",
-    url: "https://doi.org/10.1016/j.eswa.2026.133507",
-  },
-  {
-    year: "2026",
     title: "Group-wise Data Ordering: Enhancing Instruction Tuning of Large Language Models via Embedding Proximity",
     pub: "International Conference on Machine Learning (ICML 2026)",
     authors: "Yiwen Ye, Boyuan Jiang, Xiaobin Hu, Shengzhi Wang, Xiaozhong Ji, Jinghao Lin, Deli Yu, Jiale Chen, Kai Wu, Haihua Yang, Yong Xia",
